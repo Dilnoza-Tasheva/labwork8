@@ -97,7 +97,7 @@ const Home = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" component={NavLink} to="/">Edit</Button>
+                    <Button size="small" component={NavLink} to={`/quotes/${quote.id}/edit`}>Edit</Button>
                     <Button>Delete</Button>
                   </CardActions>
                 </Card>

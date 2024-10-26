@@ -9,9 +9,9 @@ import {
   Typography
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IQuoteForm } from '../../types';
-import axiosApi from '../../axiosApi.ts';
+import * as React from 'react';
 
 const initialForm = {
   author: '',
@@ -19,8 +19,22 @@ const initialForm = {
   text: '',
 };
 
-const QuoteForm = () => {
+interface Props {
+  quoteToEdit?: IQuoteForm;
+  submitForm: (quote: IQuoteForm) => void;
+}
+
+const QuoteForm: React.FC<Props> = ({quoteToEdit, submitForm}) => {
   const [form, setForm] = useState<IQuoteForm>({...initialForm});
+
+  useEffect(() => {
+    if (quoteToEdit) {
+      setForm(prevState => ({
+        ...prevState,
+        ...quoteToEdit,
+      }));
+    }
+  }, [quoteToEdit]);
 
   const categories = [
     {title: 'Star Wars', id: 'star-wars'},
@@ -50,14 +64,17 @@ const QuoteForm = () => {
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await axiosApi.post('quotes.json', {...form});
-    setForm({...initialForm});
+    submitForm({...form});
+
+    if (!quoteToEdit) {
+      setForm({...initialForm});
+    }
   };
 
   return (
     <form onSubmit={onSubmitForm}>
       <Typography variant="h6" sx={{ flexGrow: 1, textAlign: "center" }}>
-        Add new quote
+        {quoteToEdit ? 'Edit' : 'Add new'} quote
       </Typography>
 
       <Grid container spacing={2} sx={{mx: "auto", width: "50%", mt: 4}}>
@@ -105,7 +122,7 @@ const QuoteForm = () => {
         </Grid>
         <Grid size={12}>
           <Button type="submit" variant="contained" sx={{width: "100%"}}>
-            Save
+            {quoteToEdit ? 'Update' : 'Save'}
           </Button>
         </Grid>
       </Grid>
