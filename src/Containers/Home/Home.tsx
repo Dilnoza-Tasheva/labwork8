@@ -39,6 +39,15 @@ const Home = () => {
     }
   }, []);
 
+  const deleteQuote = async (idQuote: string) => {
+    try {
+      await axiosApi.delete(`quotes/${idQuote}.json`);
+      setQuotes(prevQuotes => prevQuotes.filter(quote => quote.id !== idQuote));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     void fetchData(category);
   },[fetchData, category]);
@@ -98,7 +107,7 @@ const Home = () => {
                   </CardContent>
                   <CardActions>
                     <Button size="small" component={NavLink} to={`/quotes/${quote.id}/edit`}>Edit</Button>
-                    <Button>Delete</Button>
+                    <Button onClick={() => deleteQuote(quote.id)}>Delete</Button>
                   </CardActions>
                 </Card>
               </Grid>
