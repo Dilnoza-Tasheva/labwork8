@@ -1,4 +1,13 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography
+} from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 import { IQuoteForm } from '../../types';
@@ -11,7 +20,6 @@ const initialForm = {
 
 const QuoteForm = () => {
   const [form, setForm] = useState<IQuoteForm>({...initialForm});
-  const [category, setCategory] = useState('');
 
   const categories = [
     {title: 'Star Wars', id: 'star-wars'},
@@ -29,8 +37,8 @@ const QuoteForm = () => {
     }));
   };
 
-  const onChangeCategoryField = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as string;
+  const onChangeCategoryField = (e: SelectChangeEvent) => {
+    const value = e.target.value;
     setForm(prevState => ({
       ...prevState,
       category: value,
