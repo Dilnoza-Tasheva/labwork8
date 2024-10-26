@@ -20,7 +20,7 @@ const Home = () => {
   const {category} = useParams<{category: string}>();
   const [quotes, setQuotes] = useState<IQuote[]>([]);
 
-  const fetchData = useCallback(async(selectedCategory: string) => {
+  const fetchData = useCallback(async(selectedCategory?: string) => {
     let resultFromApi = 'quotes.json';
     if (selectedCategory) {
       resultFromApi += `?orderBy="category"&equalTo="${selectedCategory}"`;
@@ -51,32 +51,32 @@ const Home = () => {
           <nav aria-label="main mailbox folders">
             <List>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="/">
+                <ListItemButton component={NavLink} to="/quotes">
                   <ListItemText primary="All" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="quotes/category/star-wars">
+                <ListItemButton component={NavLink} to="/quotes/category/star-wars">
                   <ListItemText primary="Star Wars" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="quotes/category/famous-people">
+                <ListItemButton component={NavLink} to="/quotes/category/famous-people">
                   <ListItemText primary="Famous people" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="quotes/category/saying">
+                <ListItemButton component={NavLink} to="/quotes/category/saying">
                   <ListItemText primary="Saying" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="quotes/category/humor">
+                <ListItemButton component={NavLink} to="/quotes/category/humor">
                   <ListItemText primary="Humor" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={NavLink} to="quotes/category/motivational">
+                <ListItemButton component={NavLink} to="/quotes/category/motivational">
                   <ListItemText primary="Motivational" />
                 </ListItemButton>
               </ListItem>
