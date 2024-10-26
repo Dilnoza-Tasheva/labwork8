@@ -11,6 +11,7 @@ import {
 import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 import { IQuoteForm } from '../../types';
+import axiosApi from '../../axiosApi.ts';
 
 const initialForm = {
   author: '',
@@ -46,8 +47,11 @@ const QuoteForm = () => {
   };
 
 
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    await axiosApi.post('quotes.json', {...form});
+    setForm({...initialForm});
   };
 
   return (
