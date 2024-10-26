@@ -16,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/quotes" element={<Home/>}></Route>
           <Route path="/quotes/new-quote" element={<NewQuote/>}></Route>
+          <Route path="/quotes/category/:category" element={<Home/>}></Route>
           <Route path="*" element={<Typography variant="h6">Not found</Typography>}></Route>
         </Routes>
       </Container>
