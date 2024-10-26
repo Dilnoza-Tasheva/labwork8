@@ -67,65 +67,69 @@ const Home = () => {
     <>
       {loading ? <Loader/> :
       <>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            <nav aria-label="main mailbox folders">
-              <List>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes">
-                    <ListItemText primary="All" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes/category/star-wars">
-                    <ListItemText primary="Star Wars" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes/category/famous-people">
-                    <ListItemText primary="Famous people" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes/category/saying">
-                    <ListItemText primary="Saying" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes/category/humor">
-                    <ListItemText primary="Humor" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton component={NavLink} to="/quotes/category/motivational">
-                    <ListItemText primary="Motivational" />
-                  </ListItemButton>
-                </ListItem>
-              </List>
-            </nav>
-          </Box>
-          {quotes.length === 0 ? <p>No quotes found</p> :
-            <Grid>
-              {quotes.map((quote) => (
-                <Grid key={quote.id} sx={{mb: 4}}>
-                  <Card sx={{ minWidth: 275 }}>
-                    <CardContent>
-                      <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 14 }}>
-                        {quote.text}
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontSize: 16 }}>
-                        - {quote.author}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" component={NavLink} to={`/quotes/${quote.id}/edit`}>Edit</Button>
-                      <Button onClick={() => deleteQuote(quote.id)}>Delete</Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          }
+        <Grid container spacing={2}>
+          <Grid>
+            <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+              <nav aria-label="main mailbox folders">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes">
+                      <ListItemText primary="All" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes/category/star-wars">
+                      <ListItemText primary="Star Wars" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes/category/famous-people">
+                      <ListItemText primary="Famous people" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes/category/saying">
+                      <ListItemText primary="Saying" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes/category/humor">
+                      <ListItemText primary="Humor" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton component={NavLink} to="/quotes/category/motivational">
+                      <ListItemText primary="Motivational" />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </nav>
+            </Box>
+          </Grid>
+          <Grid>
+            {quotes.length === 0 ? <p>No quotes found</p> :
+              <Grid>
+                {quotes.map((quote) => (
+                  <Grid key={quote.id} sx={{mb: 4}}>
+                    <Card sx={{ minWidth: 275 }}>
+                      <CardContent>
+                        <Typography variant="body2" sx={{ fontSize: 16 }}>
+                          {quote.text}
+                        </Typography>
+                        <Typography variant="body2" sx={{color: 'text.secondary',  fontSize: 14 }}>
+                          - {quote.author}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button variant="contained" color="success" component={NavLink} to={`/quotes/${quote.id}/edit`}>Edit</Button>
+                        <Button variant="outlined" color="error" onClick={() => deleteQuote(quote.id)}>Delete</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            }
+          </Grid>
         </Grid>
       </>
       }
